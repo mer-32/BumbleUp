@@ -1,8 +1,7 @@
 ﻿namespace Content.CodeBase.Infrastructure.Services
 {
-    public interface IGameFactory : IService
+    public interface IUnitsFactory
     {
-        void CreatePlatforms();
         void CreatePlayer();
         void CreateEnemies();
     }

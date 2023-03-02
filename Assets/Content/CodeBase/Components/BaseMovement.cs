@@ -8,7 +8,7 @@ namespace Content.CodeBase.Components
 {
     public abstract class BaseMovement : MonoBehaviour
     {
-        protected IPlatformsFactory platformsFactory;
+        protected IPlatformsManager platformsManager;
         protected IInputService inputService;
 
         protected float jumpForwardCount = 0;
@@ -19,16 +19,13 @@ namespace Content.CodeBase.Components
         public Action Falled { get; set; }
 
         [Inject]
-        private void Construct(IInputService inputService, IPlatformsFactory platformsFactory)
+        private void Construct(IInputService inputService, IPlatformsManager platformsManager)
         {
             this.inputService = inputService;
-            this.platformsFactory = platformsFactory;
+            this.platformsManager = platformsManager;
         }
 
-        public virtual void Init()
-        {
-            nextPos = transform.position;
-        }
+        public virtual void Init() => nextPos = transform.position;
 
         protected virtual void Jump(Vector3 endPos, float power = 3f, float duration = 0.8f, Action jumpComplete = null)
         {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Content.CodeBase.Infrastructure.Services;
+using UnityEngine;
+using Zenject;
 
 namespace Content.CodeBase.Components
 {
@@ -7,6 +9,8 @@ namespace Content.CodeBase.Components
         [SerializeField] private float _jumpPower = 2;
         [SerializeField] private float _jumpDuration = 0.8f;
         [SerializeField] private int _jumpStep = 1;
+
+        [Inject] private IPlatformsManager _platformsManager;
 
         public override void Init()
         {
@@ -18,9 +22,10 @@ namespace Content.CodeBase.Components
         private void JumpForward()
         {
             jumpForwardCount++;
-            nextPos -= platformsFactory.JumpVector * _jumpStep;
+            
+            nextPos -= _platformsManager.GetPlatformStep() * _jumpStep;
 
-            if (jumpForwardCount > platformsFactory.Platforms.Count)
+            if (jumpForwardCount > _platformsManager.GetPlatforms().Count)
             {
                 Fall();
             }

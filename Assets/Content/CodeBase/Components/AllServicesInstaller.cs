@@ -11,7 +11,10 @@ namespace Content.CodeBase.Components
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
             Container.Bind<IInputService>().To<MobileInputService>().AsSingle();
             Container.Bind<IUnitDataService>().To<UnitDataService>().AsSingle();
+            Container.Bind<IPlatformsManager>().To<PlatformsManager>().AsSingle();
+            Container.Bind<IUnitsFactory>().To<UnitsFactory>().AsSingle();
+
+            Container.Bind<CameraManager>().FromNew().AsSingle();
         }
     }
 }
-

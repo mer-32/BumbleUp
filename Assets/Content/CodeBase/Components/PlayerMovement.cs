@@ -1,4 +1,6 @@
+using Content.CodeBase.Infrastructure.Services;
 using UnityEngine;
+using Zenject;
 
 namespace Content.CodeBase.Components
 {
@@ -22,13 +24,13 @@ namespace Content.CodeBase.Components
             {
                 JumpForward();
 
-                platformsFactory.SwapPlatforms();
+                platformsManager.SwapPlatforms();
             }
         }
 
         private void JumpForward()
         {
-            nextPos += platformsFactory.JumpVector;
+            nextPos += platformsManager.GetPlatformStep();
             Jump(nextPos);
         }
 
@@ -36,7 +38,7 @@ namespace Content.CodeBase.Components
         {
             nextPos += jumpSide * Vector3.right * _jumpSidePower;
 
-            if (platformsFactory.PlatformSize.x / 2 < Mathf.Abs(nextPos.x))
+            if (platformsManager.GetPlatformSize().x / 2 < Mathf.Abs(nextPos.x))
             {
                 Fall();
             }
